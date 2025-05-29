@@ -80,7 +80,7 @@ nav ul li a:hover, nav ul li a:focus {
 
 .heroCarousel {
     position: relative;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
     margin-bottom: 3rem;
     border-radius: var(--border-radius);
@@ -90,7 +90,7 @@ nav ul li a:hover, nav ul li a:focus {
 .carousel-slide {
     display: flex;
     width: 300%;
-    height: 200px; /* Match heroCarousel height */
+    height: 300px; /* Match heroCarousel height */
     transition: transform 0.5s ease-in-out;
 }
 
@@ -107,7 +107,7 @@ nav ul li a:hover, nav ul li a:focus {
     text-shadow: 0 0 15px rgba(0,0,0,0.8);
     font-size: 2.5rem;
     padding: 2rem;
-    height: 200px;
+    height: 300px;
 }
 .nav-links {
     display: flex;
@@ -409,6 +409,111 @@ footer {
     font-family: Arial, sans-serif;
 }
 
+/* Top header styles */
+.top-header {
+    background-color:rgb(235, 206, 206);
+    padding: 0.5rem 1rem;
+    box-shadow: var(--box-shadow);
+    height: 50px;
+}
+
+.top-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0px;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    margin-top: 0px;
+    background-color: rgb(235, 206, 206);
+    justify-content: flex-end;
+    margin-left: auto;
+    max-width: 180px;
+    font-size: 0.8rem;
+    margin-right: 0; /* Ensure no right margin */
+    position: relative;
+    right: 0;
+}
+
+.search-form input[type="text"] {
+    padding: 0.2rem 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 15px 0 0 15px;
+    font-size: 0.75rem;
+    outline: none;
+    height: 22px;
+    width: 100px;
+    margin-top: 0px;
+    margin-bottom: 0;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    transition: border-color 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.search-form button {
+    padding: 0 10px;
+    border: none;
+    background-color: #c1a6a6;
+    font-weight: 600;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.search-form button:hover,
+.search-form button:focus {
+    background-color: #a48cbc;
+    outline: none;
+}
+
+.search-form button:hover,
+.search-form button:focus {
+    background-color: #e6e5e8;
+    outline: none;
+    margin-top: 0px;
+}
+
+.language-translator {
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--border-radius);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: white;
+    color: var(--primary-color);
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.language-translator:hover,
+.language-translator:focus {
+    background-color: var(--accent-color);
+    color: white;
+    outline: none;
+}
+
 footer img {
     height: 50px;
     vertical-align: middle;
@@ -458,7 +563,7 @@ footer div:last-child {
     gap: 2rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    background-color: white;
+    background-color: rgb(227, 220, 220);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-align: center;
@@ -470,7 +575,7 @@ footer div:last-child {
     color: rgb(106 13 173) !important;
     text-decoration: none !important;
     padding: 5px 5px !important;
-    background-color: white !important;
+    background-color: rgb(193, 128, 207) !important;
     border-radius: 8px !important;
     font-weight: 700 !important;
     box-shadow: 0 4px 8px rgba(106, 13, 173, 0.3) !important;
@@ -585,7 +690,7 @@ form input[type="submit"]:focus {
     text-shadow: 0 0 10px rgba(0,0,0,0.7);
     font-size: 2em;
     padding: 20px;
-    height: 400px;
+    height: 300px;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -607,8 +712,8 @@ form input[type="submit"]:focus {
 .carousel-item h1{
     position: relative;
     z-index: 2;
-    color: lab(97.6% 1.67 0.58);
-    margin: 40px auto;
+    color: lab(85.77% -51.42 -3.81);
+    margin: 60px 40px ;
     text-shadow: 0 0 10px rgba(0,0,0,0.7);
     align-content: center;
     text-align: center;
@@ -652,10 +757,10 @@ form input[type="submit"]:focus {
     transform: translate(-50%, -50%);
     bottom: 10;
     top: 70;
-    color: #0e0f49;
-    left: 250;
+    color: #9f1deb;
+    left: 450;
     position: relative;
-    font-weight: bold;
+    font-weight:bold;
 }
 
 .promotions {

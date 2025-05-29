@@ -17,21 +17,17 @@
 
         <div class="carousel-item active" style="background-image: url('images/slide1.png');">
           <div class="carousel-caption">
-            <h1>Welcome to Pajemo Bank</h1> <br>
-            <p class="pp">Your trusted partner in financial growth.</p>
+            <p class="pp">Your trusted partner.</p>
           </div>
         </div>
 
         <div class="carousel-item" style="background-image: url('images/slide2.png');">
           <div class="carousel-caption">
-            <h1>Secure Online Banking</h1> <br>
             <p class="pp">Manage your accounts anytime, anywhere.</p>
           </div>
         </div>
-
         <div class="carousel-item" style="background-image: url('images/slide3.png');">
           <div class="carousel-caption">
-            <h1>Personalized Financial Solutions</h1> <br>
             <p class="pp">Tailored services to meet your needs.</p>
           </div>
         </div>
