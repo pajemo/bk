@@ -4,6 +4,22 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 ?>
 
+<div class="top-header">
+    <div class="top-header-content">
+        <form class="search-form" action="search.php" method="GET">
+            <input type="text" name="q" placeholder="Search..." aria-label="Search">
+            <button type="submit">Search</button>
+        </form>
+        <select class="language-translator" aria-label="Select Language">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="zh">Chinese</option>
+        </select>
+    </div>
+</div>
+
 <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
@@ -22,11 +38,11 @@ if (session_status() == PHP_SESSION_NONE) {
 </nav>
 
 <?php if (!isset($_SESSION['user_id'])): ?>
-<div class="nav-links" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+<div class="nav-links" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; height: 40px;">
     <div style="flex-shrink: 0;">
-        <a href="index.php"><img src="images/logo.png" alt="Pajemo Bank Logo" style="height: 40px;"></a>
+        <a href="index.php"><img src="images/logo.png" alt="Pajemo Bank Logo" style="height: 25px;"></a>
     </div>
-    <div style="display: flex; gap: 20px; align-items: center; justify-content: space-between; width: 100%;">
+    <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; width: 100%; height: 30px;">
         <span style="margin-right: 20px;">
             <i class="bi bi-telephone-fill"></i> +1 (555) 123-4567 &nbsp; | &nbsp; 
             <i class="bi bi-envelope-fill"></i> support@pajemobank.com
