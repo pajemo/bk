@@ -6,6 +6,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <div class="top-header">
     <div class="top-header-content">
+        <div class="top-header-contact">
+            <i class="bi bi-telephone-fill"></i> +1 (555) 123-4567 &nbsp; | &nbsp; 
+            <i class="bi bi-envelope-fill"></i> support@pajemobank.com
+        </div>
         <form class="search-form" action="search.php" method="GET">
             <input type="text" name="q" placeholder="Search..." aria-label="Search">
             <button type="submit">Search</button>
@@ -32,7 +36,6 @@ if (session_status() == PHP_SESSION_NONE) {
         <?php else: ?>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="about.php">About Us</a></li>
-            <li><a href="gpt.php"></a></li>
         <?php endif; ?>
     </ul>
 </nav>
@@ -40,12 +43,10 @@ if (session_status() == PHP_SESSION_NONE) {
 <?php if (!isset($_SESSION['user_id'])): ?>
 <div class="nav-links" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; height: 40px;">
     <div style="flex-shrink: 0;">
-        <a href="index.php"><img src="images/logo.png" alt="Pajemo Bank Logo" style="height: 25px;"></a>
+        <a href="index.php"><img src="images/logo.png" alt="Pajemo Bank circular logo with a classical bank building in front of mountains and a sunrise, surrounded by the words PAJEMO BANK in large letters, conveying trust and stability" style="height: 25px;"></a>
     </div>
     <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; width: 100%; height: 30px;">
         <span style="margin-right: 20px;">
-            <i class="bi bi-telephone-fill"></i> +1 (555) 123-4567 &nbsp; | &nbsp; 
-            <i class="bi bi-envelope-fill"></i> support@pajemobank.com
         </span>
         <div>
             <a href="login.php" style="display: inline-block; margin-right: 10px;">Login</a>

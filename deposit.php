@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-
+include 'header.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -15,20 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please enter a valid amount.";
     } else {
         // Fetch account ID
-        $stmt = $conn->prepare("SELECT AccountID FROM Accounts WHERE UserID = ?");
-        $stmt->bind_param("i", $userID);
+$stmt = $conn->prepare("SELECT AccountID FROM accounts WHERE user_id = ?");
+$stmt->bind_param("i", $userID);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $accountID = $row['AccountID'];
 
         // Update balance
-        $stmt = $conn->prepare("UPDATE Accounts SET Balance = Balance + ? WHERE AccountID = ?");
+        $stmt = $conn->prepare("UPDATE accounts SET Balance = Balance + ? WHERE AccountID = ?");
         $stmt->bind_param("di", $amount, $accountID);
         $stmt->execute();
 
         // Insert transaction
-        $stmt = $conn->prepare("INSERT INTO Transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Deposit', ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Deposit', ?, NOW())");
         $stmt->bind_param("id", $accountID, $amount);
         $stmt->execute();
 

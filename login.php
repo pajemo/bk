@@ -20,23 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Invalid email format.";
     } else {
         // Check if user exists and email verified
-        $stmt = $conn->prepare("SELECT UserID, IsEmailVerified FROM Users WHERE Email = ?");
+        $stmt = $conn->prepare("SELECT id, email_verified_at FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         if (!$row) {
             $message = "Email not registered.";
-        } elseif (!$row['IsEmailVerified']) {
+        } elseif (!$row['email_verified_at']) {
             $message = "Email not verified. Please verify your email first.";
         } else {
-            $userID = $row['UserID'];
+            $userID = $row['id'];
             // Generate login code
             $code = generateCode(6);
             $expiry = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
             // Insert login code
-            $stmt2 = $conn->prepare("INSERT INTO LoginCodes (UserID, Code, Expiry) VALUES (?, ?, ?)");
+            $stmt2 = $conn->prepare("INSERT INTO Logincodes (user_id, code, expiry) VALUES (?, ?, ?)");
             $stmt2->bind_param("iss", $userID, $code, $expiry);
             $stmt2->execute();
 
@@ -72,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Send Login Code">
     </form>
     <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+    <p>Didn't receive a verification code? <a href="resend_verification.php">Resend here</a>.</p>
 </div>
 
 <script>

@@ -210,7 +210,7 @@ nav ul li a:hover, nav ul li a:focus {
 
 .cta {
     text-align: center;
-    background: var(--primary-color);
+    background: rgb(201, 201, 131);
     color: white;
     padding: 3rem 1rem;
     border-radius: var(--border-radius);
@@ -421,26 +421,83 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     margin-top: 0px;
     width: 100%;
 }
 
+.top-header-contact {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
 .search-form {
     display: flex;
     align-items: center;
-    height: 18px;
+    height: 32px;
     margin-top: 0px;
-    background-color: rgb(235, 206, 206);
+    background-color: transparent;
     justify-content: flex-end;
     margin-left: auto;
-    max-width: 180px;
-    font-size: 0.8rem;
-    margin-right: 0; /* Ensure no right margin */
+    max-width: 220px;
+    font-size: 0.9rem;
+    margin-right: 0;
     position: relative;
     right: 0;
+    border: 1px solid var(--accent-color);
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(155, 48, 255, 0.3);
+    padding: 0 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-form:hover {
+    box-shadow: 0 4px 12px rgba(155, 48, 255, 0.5);
+}
+
+.search-form input[type="text"] {
+    padding: 0 10px;
+    border: none;
+    border-radius: 25px 0 0 25px;
+    font-size: 0.85rem;
+    outline: none;
+    height: 28px;
+    width: 160px;
+    margin-top: 0px;
+    margin-bottom: 0;
+    background-color: #fff;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+.search-form button {
+    padding: 0 15px;
+    border: none;
+    background-color: var(--accent-color);
+    font-weight: 600;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.search-form button:hover,
+.search-form button:focus {
+    background-color: #7a1ed9;
+    outline: none;
 }
 
 .search-form input[type="text"] {

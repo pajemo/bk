@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $userID = $_SESSION['user_id'];
 
 // Fetch user account and balance
-$stmt = $conn->prepare("SELECT AccountID, Balance FROM Accounts WHERE UserID = ?");
+$stmt = $conn->prepare("SELECT AccountID, Balance FROM Accounts WHERE user_id = ?");
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -17,12 +17,12 @@ $row = $result->fetch_assoc();
 
 if (!$row) {
     // Create new account with zero balance
-    $stmtCreate = $conn->prepare("INSERT INTO Accounts (UserID, Balance) VALUES (?, 0)");
+    $stmtCreate = $conn->prepare("INSERT INTO Accounts (user_id, Balance) VALUES (?, 0)");
     $stmtCreate->bind_param("i", $userID);
     $stmtCreate->execute();
 
     // Fetch the newly created account
-    $stmt = $conn->prepare("SELECT AccountID, Balance FROM Accounts WHERE UserID = ?");
+    $stmt = $conn->prepare("SELECT AccountID, Balance FROM Accounts WHERE user_id = ?");
     $stmt->bind_param("i", $userID);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -32,7 +32,7 @@ if (!$row) {
 $accountID = $row['AccountID'];
 $balance = $row['Balance'];
 
-// Fetch recent transactions
+// Fetch recent transactions (no alias, match column names in output)
 $stmt = $conn->prepare("SELECT TransactionType, Amount, TransactionDate FROM Transactions WHERE AccountID = ? ORDER BY TransactionDate DESC");
 $stmt->bind_param("i", $accountID);
 $stmt->execute();
@@ -54,6 +54,7 @@ while ($row = $result->fetch_assoc()) {
     <h2>Dashboard</h2>
     <p>Welcome, User #<?php echo htmlspecialchars($userID); ?></p>
     <p>Account Balance: $<?php echo number_format($balance, 2); ?></p>
+
     <h3>Recent Transactions</h3>
     <table>
         <tr>
@@ -69,7 +70,13 @@ while ($row = $result->fetch_assoc()) {
         </tr>
         <?php endforeach; ?>
     </table>
-    <p><a href="deposit.php">Make a Deposit</a> | <a href="withdrawal.php">Make a Withdrawal</a> | <a href="transfer.php">Transfer Funds</a> | <a href="logout.php">Logout</a></p>
+
+    <p>
+        <a href="deposit.php">Make a Deposit</a> |
+        <a href="withdrawal.php">Make a Withdrawal</a> |
+        <a href="transfer.php">Transfer Funds</a> |
+        <a href="logout.php">Logout</a>
+    </p>
 <?php include 'footer.php'; ?>
 </body>
 </html>
