@@ -55,15 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <section class="banners">
     <div class="banner-item">
-        <h3>Low Interest Rates</h3>
+        <a href="low-interest-rates.php"><img src="images/low-interest.png" alt="Low Interest Rates"></a>
+        <h3><a href="low-interest-rates.php">Low Interest Rates</a></h3>
         <p>Enjoy competitive rates on all our loan products.</p>
     </div>
     <div class="banner-item">
-        <h3>24/7 Customer Support</h3>
+        <a href="customer-support.php"><img src="images/customer-support.png" alt="24/7 Customer Support"></a>
+        <h3><a href="customer-support.php">24/7 Customer Support</a></h3>
         <p>Our team is here to help you anytime, anywhere.</p>
     </div>
     <div class="banner-item">
-        <h3>Secure Transactions</h3>
+        <a href="secure-transactions.php"><img src="images/secure-transactions.png" alt="Secure Transactions"></a>
+        <h3><a href="secure-transactions.php">Secure Transactions</a></h3>
         <p>Bank with confidence using our advanced security measures.</p>
     </div>
 </section>
@@ -73,17 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="feature-list">
         <div class="feature-item">
             <img src="images/service1.png" alt="Online Banking">
-            <h3>Online Banking</h3>
+            <h3><a href="online-banking.php">Online Banking</a></h3>
             <p>Access your accounts and manage your finances online securely and conveniently.</p>
         </div>
         <div class="feature-item">
             <img src="images/service2.png" alt="Loans">
-            <h3>Loans</h3>
+            <h3><a href="loans.php">Loans</a></h3>
             <p>Flexible loan options to help you achieve your personal and business goals.</p>
         </div>
         <div class="feature-item">
             <img src="images/service3.png" alt="Investment">
-            <h3>Investment</h3>
+            <h3><a href="investment.php">Investment</a></h3>
             <p>Grow your wealth with our expert investment services and advice.</p>
         </div>
     </div>

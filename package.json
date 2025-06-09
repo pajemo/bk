@@ -1,0 +1,14 @@
+{
+  "name": "project2",
+  "version": "1.0.0",
+  "main": "login.js",
+  "scripts": {
+    "dev": "echo \"This is my dev script!\"",
+    "build": "echo \"This is my build script!\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

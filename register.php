@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             if (move_uploaded_file($fileTmpPath, $destPath)) {
                 // Check if email already exists
-                $stmt = $conn->prepare("SELECT UserID FROM Users WHERE Email = ?");
+                $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
                 $stmt->bind_param("s", $email);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     // Insert user with new fields
                     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                    $stmt = $conn->prepare("INSERT INTO Users (FirstName, Surname, DateOfBirth, Address, PhoneNumber, IDType, IDNumber, IDUpload, Email, PasswordHash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssssssss", $firstName, $surname, $dob, $address, $phone, $idType, $idNumber, $newFileName, $email, $passwordHash);
+$stmt = $conn->prepare("INSERT INTO users (FirstName, Surname, DateOfBirth, Address, PhoneNumber, IDType, IDNumber, IDUpload, Email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssssss", $firstName, $surname, $dob, $address, $phone, $idType, $idNumber, $newFileName, $email, $passwordHash);
                     if ($stmt->execute()) {
                         $userID = $conn->insert_id;
 
@@ -75,8 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $expiry = date('Y-m-d H:i:s', strtotime('+1 day'));
 
                         // Insert verification code
-                        $stmt = $conn->prepare("INSERT INTO EmailVerifications (UserID, VerificationCode, Expiry) VALUES (?, ?, ?)");
-                        $stmt->bind_param("iss", $userID, $code, $expiry);
+$stmt = $conn->prepare("INSERT INTO emailverifications (user_id, VerificationCode, Expiry) VALUES (?, ?, ?)");
+$stmt->bind_param("iss", $userID, $code, $expiry);
                         $stmt->execute();
 
                         // Send verification email

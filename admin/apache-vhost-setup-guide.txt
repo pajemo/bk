@@ -1,0 +1,42 @@
+Step-by-step guide to add and enable Apache virtual host for project2.local:
+
+1. Add Virtual Host Configuration:
+   - Open your Apache configuration directory, usually at:
+     C:\xampp\apache\conf\extra\
+   - Open the file httpd-vhosts.conf in a text editor.
+   - Add the following virtual host configuration at the end of the file:
+
+     <VirtualHost *:80>
+         ServerName project2.local
+         DocumentRoot "C:/xampp/htdocs/project2/admin/public"
+
+         <Directory "C:/xampp/htdocs/project2/admin/public">
+             Options Indexes FollowSymLinks
+             AllowOverride All
+             Require all granted
+         </Directory>
+
+         ErrorLog "logs/project2-error.log"
+         CustomLog "logs/project2-access.log" combined
+     </VirtualHost>
+
+2. Enable Virtual Hosts in Apache:
+   - Open the main Apache config file: C:\xampp\apache\conf\httpd.conf
+   - Ensure the following line is uncommented (remove # if present):
+     Include conf/extra/httpd-vhosts.conf
+
+3. Add Hosts File Entry:
+   - Open Notepad as Administrator.
+   - Open the hosts file located at: C:\Windows\System32\drivers\etc\hosts
+   - Add the following line at the end:
+     127.0.0.1    project2.local
+   - Save the file.
+
+4. Restart Apache:
+   - Use the XAMPP Control Panel to stop and start Apache.
+
+5. Test:
+   - Open your browser and navigate to http://project2.local/
+   - You should see your Laravel app's homepage or welcome page.
+
+If you encounter any issues, please let me know and I can assist further.

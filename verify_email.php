@@ -6,8 +6,13 @@ $message = '';
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
 
-    // Check verification code
-    $stmt = $conn->prepare("SELECT ev.VerificationID, ev.UserID, ev.Expiry, ev.IsUsed, u.IsEmailVerified FROM EmailVerifications ev JOIN Users u ON ev.UserID = u.UserID WHERE ev.VerificationCode = ?");
+    // Check verification code (correct column names)
+    $stmt = $conn->prepare("
+SELECT ev.VerificationID, ev.user_id, ev.Expiry, ev.IsUsed, u.email_verified_at
+FROM emailverifications ev
+JOIN users u ON ev.user_id = u.id
+WHERE ev.VerificationCode = ?
+    ");
     $stmt->bind_param("s", $code);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -19,15 +24,15 @@ if (isset($_GET['code'])) {
         } elseif ($row['IsEmailVerified']) {
             $message = "Your email is already verified.";
         } elseif (strtotime($row['Expiry']) < time()) {
-            $message = "This verification link has expired.";
+            $message = "This verification link has expired. <a href='resend_verification.php'>Click here to request a new verification code</a>.";
         } else {
             // Mark user as verified
-            $stmt2 = $conn->prepare("UPDATE Users SET IsEmailVerified = 1 WHERE UserID = ?");
-            $stmt2->bind_param("i", $row['UserID']);
+$stmt2 = $conn->prepare("UPDATE users SET email_verified_at = NOW() WHERE id = ?");
+$stmt2->bind_param("i", $row['user_id']);
             $stmt2->execute();
 
             // Mark code as used
-            $stmt3 = $conn->prepare("UPDATE EmailVerifications SET IsUsed = 1 WHERE VerificationID = ?");
+            $stmt3 = $conn->prepare("UPDATE emailverifications SET IsUsed = 1 WHERE VerificationID = ?");
             $stmt3->bind_param("i", $row['VerificationID']);
             $stmt3->execute();
 
@@ -45,12 +50,13 @@ if (isset($_GET['code'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Email Verification - Bank Website</title>
+    <title>Email Verification - Pajemo Bank</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <h2>Email Verification</h2>
     <p><?php echo $message; ?></p>
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

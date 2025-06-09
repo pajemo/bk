@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 require 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -23,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please enter a valid amount.";
     } else {
         // Fetch sender account and balance
-        $stmt = $conn->prepare("SELECT AccountID, Balance FROM Accounts WHERE UserID = ?");
+        $stmt = $conn->prepare("SELECT AccountID, Balance FROM accounts WHERE user_id = ?");
         $stmt->bind_param("i", $userID);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $message = "Insufficient balance.";
         } else {
             // Fetch recipient account by bank account number and bank name
-            $stmt = $conn->prepare("SELECT AccountID, UserID FROM Accounts WHERE AccountNumber = ? AND BankName = ?");
+            $stmt = $conn->prepare("SELECT AccountID, user_id FROM accounts WHERE AccountNumber = ? AND BankName = ?");
             $stmt->bind_param("ss", $recipientBankAccount, $recipientBankName);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -47,22 +48,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 try {
                     // Deduct from sender
-                    $stmt = $conn->prepare("UPDATE Accounts SET Balance = Balance - ? WHERE AccountID = ?");
+                    $stmt = $conn->prepare("UPDATE accounts SET Balance = Balance - ? WHERE AccountID = ?");
                     $stmt->bind_param("di", $amount, $senderAccount['AccountID']);
                     $stmt->execute();
 
                     // Add to recipient
-                    $stmt = $conn->prepare("UPDATE Accounts SET Balance = Balance + ? WHERE AccountID = ?");
+                    $stmt = $conn->prepare("UPDATE accounts SET Balance = Balance + ? WHERE AccountID = ?");
                     $stmt->bind_param("di", $amount, $recipientAccount['AccountID']);
                     $stmt->execute();
 
                     // Insert sender transaction
-                    $stmt = $conn->prepare("INSERT INTO Transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer Out', ?, NOW())");
+                    $stmt = $conn->prepare("INSERT INTO transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer Out', ?, NOW())");
                     $stmt->bind_param("id", $senderAccount['AccountID'], $amount);
                     $stmt->execute();
 
                     // Insert recipient transaction
-                    $stmt = $conn->prepare("INSERT INTO Transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer In', ?, NOW())");
+                    $stmt = $conn->prepare("INSERT INTO transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer In', ?, NOW())");
                     $stmt->bind_param("id", $recipientAccount['AccountID'], $amount);
                     $stmt->execute();
 
@@ -78,12 +79,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 try {
                     // Deduct from sender
-                    $stmt = $conn->prepare("UPDATE Accounts SET Balance = Balance - ? WHERE AccountID = ?");
+                    $stmt = $conn->prepare("UPDATE accounts SET Balance = Balance - ? WHERE AccountID = ?");
                     $stmt->bind_param("di", $amount, $senderAccount['AccountID']);
                     $stmt->execute();
 
                     // Insert sender transaction
-                    $stmt = $conn->prepare("INSERT INTO Transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer Out', ?, NOW())");
+                    $stmt = $conn->prepare("INSERT INTO transactions (AccountID, TransactionType, Amount, TransactionDate) VALUES (?, 'Transfer Out', ?, NOW())");
                     $stmt->bind_param("id", $senderAccount['AccountID'], $amount);
                     $stmt->execute();
 

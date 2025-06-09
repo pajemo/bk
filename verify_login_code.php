@@ -1,5 +1,6 @@
-<?php
+   <?php
 require 'config.php';
+include 'header.php';
 
 $message = '';
 
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
         $message = "Please enter the login code.";
     } else {
         // Check login code
-        $stmt = $conn->prepare("SELECT LoginCodeID, UserID, Expiry, IsUsed FROM LoginCodes WHERE Code = ?");
+$stmt = $conn->prepare("SELECT LoginCodeID, user_id, Expiry, IsUsed FROM LoginCodes WHERE Code = ?");
         $stmt->bind_param("s", $code);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resend'])) {
             $stmt2->execute();
 
             // Set session and redirect to dashboard
-            $_SESSION['user_id'] = $row['UserID'];
+$_SESSION['user_id'] = $row['user_id'];
             unset($_SESSION['login_user_id']);
             header("Location: dashboard.php");
             exit();
