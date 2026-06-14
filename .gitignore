@@ -1,0 +1,40 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+config.local.php
+mailer.local.php
+cookies.txt
+
+# Runtime artifacts and uploads
+uploads/**
+!uploads/.gitkeep
+cache/**
+!cache/.gitkeep
+*.log
+*.tmp
+*.bak
+
+# Dependencies
+vendor/
+node_modules/
+
+# Build/test artifacts
+coverage/
+.nyc_output/
+.phpunit.result.cache
+
+# XAMPP / local DB exports (optional patterns)
+*.sql.gz
+
+# Keep Laravel subproject vendor ignored too
+laravelproject/vendor/
+laravelproject/node_modules/
